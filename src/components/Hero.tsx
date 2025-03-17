@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="flex justify-center gap-52 z-10 h-screen items-center">
+    <div className="flex justify-center gap-52 z-10 h-screen items-center md:pt-[60px]">
       <div className="w-[500px] h-fit">
         <h2 className="text-[#71BBB2] font-black text-xl">
           Welcome back, User!

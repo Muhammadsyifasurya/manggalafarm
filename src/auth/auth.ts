@@ -41,5 +41,6 @@ export const register = async (
     };
   } catch (error) {
     throw new Error("error");
+    console.log(error)
   }
 };

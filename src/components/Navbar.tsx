@@ -4,7 +4,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className="fixed flex justify-between px-[150px] h-[80px] items-center shadow-2xl w-full z-30 bg-white">
+    <nav className="fixed flex justify-between px-[150px] h-[80px] items-center shadow-md w-full z-30 bg-white">
       <h2 className="font-bold text-2xl text-[#3A546B]">Manggala Farm</h2>
       <div>
         <ul className="flex justify-between gap-6 items-center font-semibold text-[#3A546B]">

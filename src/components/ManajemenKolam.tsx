@@ -39,31 +39,29 @@ const ManajemenKolam = () => {
   }, []);
 
   return (
-    <div className="h-screen" id="manajemen">
-      <div className="flex items-center ml-[150px] gap-7 pt-[100px]">
-        <Image src="/fish.svg" width={120} height={120} alt="icon ikan" />
+    <div className="" id="manajemen">
+      <div className="flex items-center 3xl:ml-[150px] ml-24 gap-7 pt-[100px]">
+        <Image src="/fish.svg" width={100} height={120} alt="icon ikan" />
         <h1 className="text-5xl text-[#5B8982]">Reservasi Kolam</h1>
       </div>
-      <div className="flex justify-between mx-[300px] mt-7">
+      <div className="flex justify-around mx-[190px] 3xl:mx-[300px] mt-7">
         {categories.length > 0 ? (
           categories.map((category, index) => (
             <div
-              className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-gray-50 border border-[#5B8982]"
+              className="max-w-sm rounded-xl overflow-hidden shadow-lg bg-gray-50 border border-[#5B8982]"
               key={index}
             >
               <Image
                 src="/kolam.svg"
                 alt="Fish Pond"
-                width={400}
+                width={300}
                 height={250}
                 className="p-2"
               />
               <div className="px-6 py-4 ">
                 <p className="text-center text-[#304C64] text-xl font-semibold mb-1">
-                  "{" "}
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
-                  "
                 </p>
                 <p className="text-center  text-[#304C64] text-4xl font-bold">
                   Rp. {category.data.harga.toLocaleString()},-
