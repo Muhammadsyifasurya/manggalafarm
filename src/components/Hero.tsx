@@ -9,7 +9,13 @@ const Hero = () => {
     <div className="flex justify-center gap-52 z-10 h-screen items-center md:pt-[60px]">
       <div className="w-[500px] h-fit">
         <h2 className="text-[#71BBB2] font-black text-xl">
-          Welcome back, {username === "admin" ? "Admin" : "User"}!
+          Welcome back,{" "}
+          {username === "admin"
+            ? "Admin"
+            : username === null
+            ? "Guest"
+            : username}
+          !
         </h2>
         <h1 className="mt-8 font-bold text-5xl text-[#27445D]">
           Temukan Kemudahan Dalam Mengelola Kolam Anda!

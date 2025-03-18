@@ -18,6 +18,7 @@ export default function RegisterPage() {
       router.push("/login"); // Redirect ke halaman login setelah register
     } catch (error) {
       alert("Gagal registrasi. Coba lagi.");
+      console.log(error);
     }
   };
 

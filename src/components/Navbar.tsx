@@ -5,8 +5,7 @@ import React from "react";
 import { useUser } from "@/context/UserContext";
 
 const Navbar = () => {
-  const { username, logout } = useUser();
-
+  const { user, logout } = useUser();
   return (
     <nav className="fixed flex justify-between px-[150px] h-[80px] items-center shadow-md w-full z-30 bg-white">
       <h2 className="font-bold text-2xl text-[#3A546B]">Manggala Farm</h2>
@@ -25,21 +24,18 @@ const Navbar = () => {
             <a href="#">Tentang Kami</a>
           </li>
           {/* Menampilkan profile dan logout hanya jika username ada */}
-          {username ? (
+          {user ? (
             <>
-              <li className="cursor-pointer">
-                <Link href="/profile" className="flex">
-                  <Image
-                    src="/ic_profile.svg"
-                    height={35}
-                    width={35}
-                    alt="icon profile"
-                  />
-                  <h2>{username}</h2>
-                </Link>
-              </li>
-              <li className="cursor-pointer" onClick={logout}>
-                <button className="text-red-500 hover:underline">Logout</button>
+              <li onClick={logout} className="flex items-center gap-2">
+                <Image
+                  src="/ic_profile.svg"
+                  height={35}
+                  width={35}
+                  alt="icon profile"
+                />
+                <button className="text-red-500 hover:underline cursor-pointer">
+                  Logout
+                </button>
               </li>
             </>
           ) : (

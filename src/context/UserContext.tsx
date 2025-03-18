@@ -10,15 +10,17 @@ import React, {
 import Cookies from "js-cookie";
 
 interface User {
-  email: string;
-  password: string;
+  email: string | null;
+  uid: string;
+  displayName?: string | null;
 }
 
 interface UserContextType {
   user: User | null;
   username: string | null;
-  login: (userData: User) => void;
+  logan: (userData: User) => void;
   logout: () => void;
+  setUser: (user: User) => void;
 }
 
 // Tambahkan ReactNode pada tipe children
@@ -36,7 +38,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const login = (userData: User) => {
+  const logan = (userData: User) => {
     setUser(userData);
     Cookies.set("user", JSON.stringify(userData));
   };
@@ -46,10 +48,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     Cookies.remove("user");
   };
 
-  const username = user ? user.email.split("@")[0] : null;
+  const username = user?.email ? user.email.split("@")[0] : null;
 
   return (
-    <UserContext.Provider value={{ user, username, login, logout }}>
+    <UserContext.Provider value={{ user, username, logan, logout, setUser }}>
       {children}
     </UserContext.Provider>
   );

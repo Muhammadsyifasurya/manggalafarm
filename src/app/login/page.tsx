@@ -3,21 +3,37 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaUser, FaLock } from "react-icons/fa"; // Tambahkan ikon user & lock
-import { login } from "@/auth/auth"; // Sesuaikan path ini
 import Cookies from "js-cookie"; // Impor js-cookie
+import { useUser } from "@/context/UserContext";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  const { logan } = useUser();
 
   const handleLogin = async () => {
     try {
-      const user = await login(email, password);
-      alert(`Login berhasil! Selamat datang, ${user.email}`);
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user; // Firebase user object
+
+      // Format data user agar cocok dengan context
+      const userData = {
+        email: user.email,
+        uid: user.uid,
+        displayName: user.displayName || null,
+      };
 
       // Simpan informasi user ke cookies
-      Cookies.set("user", JSON.stringify(user), { expires: 7 }); // Menyimpan selama 7 hari
+      Cookies.set("user", JSON.stringify(userData), { expires: 7 }); // Menyimpan selama 7 hari
+      logan(userData);
+
       router.push("/");
     } catch (error) {
       console.log(error);
