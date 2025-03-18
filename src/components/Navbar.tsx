@@ -20,9 +20,6 @@ const Navbar = () => {
           <li className="hover:underline hover:text-[#71BBB2]">
             <a href="#">Kontak</a>
           </li>
-          <li className="hover:underline hover:text-[#71BBB2]">
-            <a href="#">Tentang Kami</a>
-          </li>
           {/* Menampilkan profile dan logout hanya jika username ada */}
           {user ? (
             <>
