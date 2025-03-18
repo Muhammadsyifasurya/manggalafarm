@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Monitoring from "./Monitoring";
@@ -26,16 +26,15 @@ interface SensorsData {
 const Dashboard = () => {
   const [sensorData, setSensorData] = useState<SensorsData | null>(null);
 
-  useEffect(()=> {
-    const sensorsRef = ref(database, "sensors")
-    onValue(sensorsRef, (snapshot)=> {
-      const data = snapshot.val()
-      console.log(data)
-       // Simpan data ke state
-       setSensorData(data);
-    })
-    console.log("nilaiNTU:", sensorData?.kekeruhan.nilaiNTU);
-  })
+  useEffect(() => {
+    const sensorsRef = ref(database, "sensors");
+    onValue(sensorsRef, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      // Simpan data ke state
+      setSensorData(data);
+    });
+  }, []);
 
   return (
     <div>
@@ -47,19 +46,27 @@ const Dashboard = () => {
         <div className="flex flex-wrap gap-4 justify-between">
           <div className="bg-white rounded-3xl shadow-[0px_4px_16px_rgba(0,0,0,0.1)] p-4 w-[270px] flex flex-col items-center justify-center h-[129px]">
             <p className="text-gray-500 text-sm mb-1">Status Air</p>
-            <h2 className="text-2xl font-semibold text-[#27445D]">{sensorData?.kekeruhan.kekeruhanAir}</h2>
+            <h2 className="text-2xl font-semibold text-[#27445D]">
+              {sensorData?.kekeruhan.kekeruhanAir}
+            </h2>
           </div>
           <div className="bg-white rounded-3xl shadow-[0px_4px_16px_rgba(0,0,0,0.1)] p-4 w-[270px] flex flex-col items-center justify-center h-[129px]">
             <p className="text-gray-500 text-sm mb-1">Status Pakan</p>
-            <h2 className="text-2xl font-semibold text-[#27445D]">{sensorData?.ultrasonic.kapasitasPakan}</h2>
+            <h2 className="text-2xl font-semibold text-[#27445D]">
+              {sensorData?.ultrasonic.kapasitasPakan}
+            </h2>
           </div>
           <div className="bg-white rounded-3xl shadow-[0px_4px_16px_rgba(0,0,0,0.1)] p-4 w-[270px] flex flex-col items-center justify-center h-[129px]">
             <p className="text-gray-500 text-sm mb-1">Status Pompa (Buang)</p>
-            <h2 className="text-2xl font-semibold text-[#27445D]">{sensorData?.kekeruhan.pompaBuang}</h2>
+            <h2 className="text-2xl font-semibold text-[#27445D]">
+              {sensorData?.kekeruhan.pompaBuang}
+            </h2>
           </div>
           <div className="bg-white rounded-3xl shadow-[0px_4px_16px_rgba(0,0,0,0.1)] p-4 w-[270px] flex flex-col items-center justify-center h-[129px]">
             <p className="text-gray-500 text-sm mb-1">Status Pompa (Isi)</p>
-            <h2 className="text-2xl font-semibold text-[#27445D]">{sensorData?.kekeruhan.pompaIsi}</h2>
+            <h2 className="text-2xl font-semibold text-[#27445D]">
+              {sensorData?.kekeruhan.pompaIsi}
+            </h2>
           </div>
           <div className="bg-white rounded-3xl shadow-[0px_4px_16px_rgba(0,0,0,0.1)] p-4 w-[270px] flex flex-col items-center justify-center h-[129px]">
             <p className="text-gray-500 text-sm mb-1">Proses</p>
@@ -76,11 +83,13 @@ const Dashboard = () => {
           </div>
           <div className="bg-white rounded-3xl shadow-[0px_4px_16px_rgba(0,0,0,0.1)] p-4 w-[270px] flex flex-col items-center justify-center h-[129px]">
             <p className="text-gray-500 text-sm mb-1">Klasifikasi Kolam</p>
-            <h2 className="text-2xl font-semibold text-[#27445D]">{sensorData?.kekeruhan.katupWadahPakan}</h2>
+            <h2 className="text-2xl font-semibold text-[#27445D]">
+              {sensorData?.kekeruhan.katupWadahPakan}
+            </h2>
           </div>
         </div>
       </div>
-      <Monitoring ntu={sensorData?.kekeruhan.nilaiNTU ?? 0}/>
+      <Monitoring ntu={sensorData?.kekeruhan.nilaiNTU ?? 0} />
     </div>
   );
 };
