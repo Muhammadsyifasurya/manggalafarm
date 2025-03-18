@@ -48,7 +48,6 @@ const Navbar = () => {
                   width={35}
                   alt="icon profile"
                 />
-                <h1>Login</h1>
               </Link>
             </li>
           )}

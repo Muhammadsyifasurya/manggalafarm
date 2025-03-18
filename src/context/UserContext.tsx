@@ -8,6 +8,7 @@ import React, {
   ReactNode,
 } from "react";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 interface User {
   email: string | null;
@@ -30,6 +31,7 @@ interface UserProviderProps {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter(); // Inisialisasi router
 
   useEffect(() => {
     const storedUser = Cookies.get("user");
@@ -46,6 +48,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const logout = () => {
     setUser(null);
     Cookies.remove("user");
+    router.push("/login");
   };
 
   const username = user?.email ? user.email.split("@")[0] : null;
