@@ -1,12 +1,15 @@
+"use client";
 import React from "react";
 import Image from "next/image";
+import { useUser } from "@/context/UserContext";
 
 const Hero = () => {
+  const { username } = useUser();
   return (
     <div className="flex justify-center gap-52 z-10 h-screen items-center md:pt-[60px]">
       <div className="w-[500px] h-fit">
         <h2 className="text-[#71BBB2] font-black text-xl">
-          Welcome back, User!
+          Welcome back, {username === "admin" ? "Admin" : "User"}!
         </h2>
         <h1 className="mt-8 font-bold text-5xl text-[#27445D]">
           Temukan Kemudahan Dalam Mengelola Kolam Anda!
@@ -18,10 +21,12 @@ const Hero = () => {
           transparan!
         </p>
         <div className="flex gap-6 mt-6">
-          <button className="py-2 px-4 border rounded-4xl">
+          <button className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300">
             Coba Sekarang
           </button>
-          <button className="py-2 px-4 border rounded-4xl">Login</button>
+          <button className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300">
+            Login
+          </button>
         </div>
       </div>
       <div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaUser, FaLock } from "react-icons/fa"; // Tambahkan ikon user & lock
 import { login } from "@/auth/auth"; // Sesuaikan path ini
+import Cookies from "js-cookie"; // Impor js-cookie
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -14,8 +15,12 @@ export default function LoginPage() {
     try {
       const user = await login(email, password);
       alert(`Login berhasil! Selamat datang, ${user.email}`);
+
+      // Simpan informasi user ke cookies
+      Cookies.set("user", JSON.stringify(user), { expires: 7 }); // Menyimpan selama 7 hari
       router.push("/");
     } catch (error) {
+      console.log(error);
       alert("Gagal login. Periksa kembali email dan password.");
     }
   };

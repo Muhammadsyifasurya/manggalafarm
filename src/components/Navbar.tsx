@@ -1,8 +1,12 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { useUser } from "@/context/UserContext";
 
 const Navbar = () => {
+  const { username, logout } = useUser();
+
   return (
     <nav className="fixed flex justify-between px-[150px] h-[80px] items-center shadow-md w-full z-30 bg-white">
       <h2 className="font-bold text-2xl text-[#3A546B]">Manggala Farm</h2>
@@ -20,16 +24,38 @@ const Navbar = () => {
           <li className="hover:underline hover:text-[#71BBB2]">
             <a href="#">Tentang Kami</a>
           </li>
-          <li className="cursor-pointer">
-            <Link href="/login">
-              <Image
-                src="/ic_profile.svg"
-                height={35}
-                width={35}
-                alt="icon profile"
-              />
-            </Link>
-          </li>
+          {/* Menampilkan profile dan logout hanya jika username ada */}
+          {username ? (
+            <>
+              <li className="cursor-pointer">
+                <Link href="/profile" className="flex">
+                  <Image
+                    src="/ic_profile.svg"
+                    height={35}
+                    width={35}
+                    alt="icon profile"
+                  />
+                  <h2>{username}</h2>
+                </Link>
+              </li>
+              <li className="cursor-pointer" onClick={logout}>
+                <button className="text-red-500 hover:underline">Logout</button>
+              </li>
+            </>
+          ) : (
+            // Jika tidak ada username, tampilkan link login
+            <li className="hover:underline hover:text-[#71BBB2]">
+              <Link href="/login" className="flex items-center gap-3">
+                <Image
+                  src="/ic_profile.svg"
+                  height={35}
+                  width={35}
+                  alt="icon profile"
+                />
+                <h1>Login</h1>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
