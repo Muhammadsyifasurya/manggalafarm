@@ -5,9 +5,9 @@ import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
-  const { username } = useUser();
+  const { username, user } = useUser();
   const router = useRouter(); // Inisialisasi router
-  
+
   // Fungsi untuk menangani klik tombol login
   const handleLoginClick = () => {
     router.push("/login"); // Arahkan ke halaman login
@@ -38,12 +38,14 @@ const Hero = () => {
           <button className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300">
             Coba Sekarang
           </button>
-          <button
-            className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300"
-            onClick={handleLoginClick}
-          >
-            Login
-          </button>
+          {user ? (
+            <button
+              className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300"
+              onClick={handleLoginClick}
+            >
+              Login
+            </button>
+          ) : null}
         </div>
       </div>
       <div>
