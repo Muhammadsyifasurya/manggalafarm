@@ -10,6 +10,21 @@ import React, {
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 
+interface CategoryProps {
+  name: string;
+  data: {
+    diameter: number;
+    estimasiKeuntungan: number;
+    estimasiPakan: number;
+    estimasiPanen: number;
+    estimasiTotalBobot: number;
+    harga: number;
+    jumlahBibit: number;
+    targetBobot: number;
+    tinggi: number;
+  };
+}
+
 interface User {
   email: string | null;
   uid: string;
@@ -22,6 +37,8 @@ interface UserContextType {
   logan: (userData: User) => void;
   logout: () => void;
   setUser: (user: User) => void;
+  selectedPaket: CategoryProps | null;
+  setSelectedPaket: React.Dispatch<React.SetStateAction<CategoryProps | null>>;
 }
 
 // Tambahkan ReactNode pada tipe children
@@ -32,6 +49,9 @@ interface UserProviderProps {
 export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter(); // Inisialisasi router
+  const [selectedPaket, setSelectedPaket] = useState<CategoryProps | null>(
+    null
+  );
 
   useEffect(() => {
     const storedUser = Cookies.get("user");
@@ -54,7 +74,17 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const username = user?.email ? user.email.split("@")[0] : null;
 
   return (
-    <UserContext.Provider value={{ user, username, logan, logout, setUser }}>
+    <UserContext.Provider
+      value={{
+        user,
+        username,
+        logan,
+        logout,
+        setUser,
+        selectedPaket,
+        setSelectedPaket,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

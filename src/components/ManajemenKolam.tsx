@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { database } from "@/auth/firebaseConfig";
 import { ref, onValue } from "firebase/database";
+import { useUser } from "@/context/UserContext";
 
 interface CategoryProps {
   name: string;
@@ -21,6 +23,8 @@ interface CategoryProps {
 
 const ManajemenKolam = () => {
   const [categories, setCategories] = useState<CategoryProps[]>([]);
+  const router = useRouter();
+  const { setSelectedPaket } = useUser();
 
   useEffect(() => {
     // Mengambil data dari Realtime Database di Firebase
@@ -37,6 +41,11 @@ const ManajemenKolam = () => {
       }
     });
   }, []);
+
+  const handleSelectPackage = (category: CategoryProps) => {
+    setSelectedPaket(category); // Menyimpan kategori yang dipilih
+    router.push("/checkout"); // Redirect ke halaman checkout
+  };
 
   return (
     <div className="" id="manajemen">
@@ -101,7 +110,10 @@ const ManajemenKolam = () => {
                   </span>
                 </div>
                 <div className="flex w-full justify-center">
-                  <button className="bg-teal-700 hover:bg-teal-800 text-white font-bold text-lg text-center rounded-2xl py-3 px-14 mt-5">
+                  <button
+                    onClick={() => handleSelectPackage(category)}
+                    className="bg-teal-700 hover:bg-teal-800 text-white font-bold text-lg text-center rounded-2xl py-3 px-14 mt-5 cursor-pointer"
+                  >
                     Pilih Paket
                   </button>
                 </div>

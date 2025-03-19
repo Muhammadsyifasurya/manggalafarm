@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 const Hero = () => {
   const { username } = useUser();
   const router = useRouter(); // Inisialisasi router
-
+  
   // Fungsi untuk menangani klik tombol login
   const handleLoginClick = () => {
     router.push("/login"); // Arahkan ke halaman login
