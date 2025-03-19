@@ -38,14 +38,14 @@ const Hero = () => {
           <button className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300">
             Coba Sekarang
           </button>
-          {user ? (
+          {user ? null : (
             <button
               className="py-2 px-4 border rounded-4xl hover:bg-[#27445d] hover:text-white cursor-pointer transition-all ease-in-out duration-300"
               onClick={handleLoginClick}
             >
               Login
             </button>
-          ) : null}
+          )}
         </div>
       </div>
       <div>
